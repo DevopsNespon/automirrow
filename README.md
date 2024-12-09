@@ -1,18 +1,20 @@
-# Salesforce DX Project: Next Steps
+# ENet
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Proyecto
 
-## How Do You Plan to Deploy Your Changes?
+- Implementación del campañas en Mktcloud + Loyalty Management
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+>ref  <https://www.salesforce.com/marketing/loyalty-management/>
 
-## Configure Your Salesforce DX Project
+## Branch Model
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+- Cada sprint tiene su propio branch principal llamado: **SP[x]/main**
+  - Ejemplo el sprint 1 es: **SP1/main**
+- Cada __desarrollador__ desde el head (último commit) del branch main del sprint correspondiente genera un nuevo branch con el nombre **SP[x]/ENET-[nro]**
+  - Ejemplo el sprint 1, la  historia de usuario US-001: **SP1/ENET-001**
+- Al finalizar el desarrollo de la historia de usuario el __desarrollador__ hará un PR (pull request) desde la rama de desarrollo a la rama main
+  - Desde **/SP[x]/ENET-[nro]** hacia **SP[x]/main**
+    - Ejemplo el sprint 1, la  historia de usuario ENET-001: **SP1/ENET-001** hacia **SP1/main**
+- __Devops__ verifica, actualiza el/los manifiesto/s  y mergea la rama
 
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+![alt text](docs/branchModel.svg)
