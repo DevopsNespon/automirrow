@@ -1,7 +1,7 @@
 name: Sync from Bitbucket
-on:
-  schedule:
-    - cron: '*/5 * * * *'  # Cada 5 minutos
+#on:
+#  schedule:
+#    - cron: '*/5 * * * *'  # Cada 5 minutos
 jobs:
   sync:
     runs-on: ubuntu-latest
