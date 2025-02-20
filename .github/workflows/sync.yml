@@ -1,0 +1,30 @@
+name: Sync from Bitbucket
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Cada 5 minutos
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configurar SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+      - name: Clonar desde Bitbucket
+        run: |
+          git clone --mirror git@bitbucket.org:nespon/enet.git
+      - name: Verificar clonación exitosa
+        run: |
+          if [ ! -d "enet.git" ]; then
+            echo "Error: No se encontró el directorio enet.git"
+            exit 1
+          fi
+      - name: Subir a GitHub
+        run: |
+          cd enet.git
+          git remote set-url --push origin https://${{ secrets.GH_PAT }}@github.com/DevopsNespon/automirrow.git
+          git push --force --all
